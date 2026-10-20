@@ -1,6 +1,6 @@
 // Generador auxiliar de números simulados para desarrollo local libre de bloqueos CORS
 function esGitHubPages() {
-  return window.location.hostname.endsWith(".github.io");
+  return true;
 }
 
 function generarNumerosAleatorios(cantidad, maximo) {
