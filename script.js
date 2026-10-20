@@ -133,25 +133,31 @@ function renderizarQuinigol(goles) {
     });
 }
 
-function ejecutarConsultas() {
-    const juegosAPI = {
-        nacional: "loteria-nacional",
-        once: "once",
-        primitiva: "la-primitiva",
-        bonoloto: "bonoloto",
-        euromillones: "euromillones",
-        gordo: "el-gordo-de-la-primitiva",
-        eurojackpot: "eurojackpot",
-        quiniela: "la-quiniela",
-        quinigol: "el-quinigol"
-    };
+const esperar = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
-    const juegos = ["nacional", "once", "primitiva", "bonoloto", "euromillones", "gordo", "eurojackpot", "quiniela", "quinigol"];
-    juegos.forEach(juego => renderizarSorteo(juego, juegosAPI[juego]));
-}
+async function ejecutarConsultas() {
+  const juegosAPI = {
+    nacional: "loteria-nacional",
+    once: "once",
+    primitiva: "la-primitiva",
+    bonoloto: "bonoloto",
+    euromillones: "euromillones",
+    gordo: "el-gordo-de-la-primitiva",
+    eurojackpot: "eurojackpot",
+    quiniela: "la-quiniela",
+    quinigol: "el-quinigol"
+  };
 
-function actualizarPanelManual() {
-    ejecutarConsultas();
+  const juegos = ["nacional", "once", "primitiva", "bonoloto", "euromillones", "gordo", "eurojackpot", "quiniela", "quinigol"];
+  
+  for (const juego of juegos) {
+    try {
+      await renderizarSorteo(juego, juegosAPI[juego]);
+    } catch (err) {
+      console.error(`Error en sorteo ${juego}:`, err);
+    }
+    await esperar(2500);
+  }
 }
 
 function inicializarPanel() {
