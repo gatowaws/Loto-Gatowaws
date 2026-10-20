@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sorteos y Loterías</title>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+<!-- Indicador de última actualización automática -->
+<div class="actualizacion-container">
+    <span>Última actualización exitosa: </span>
+    <span id="hora-actualizacion">Cargando...</span>
+</div>
+
+    <h1>Panel de Loterías Completo</h1>
+    <p class="fecha">Fecha de consulta: <span id="fecha-actual">Cargando fecha...</span></p>
+
+    <!-- Botón manual para actualizar -->
+    <button type="button" id="btn-generar" onclick="actualizarPanelManual()">Generar Nuevas Combinaciones</button>
+
+    <div class="grid-container">
+
+        <!-- Lotería Nacional -->
+        <div class="box nacional">
+            <h2>Lotería Nacional</h2>
+            <span id="num-nacional" class="numero">Cargando...</span>
+        </div>
+
+        <!-- Sorteo ONCE -->
+        <div class="box once">
+            <h2>Sorteo ONCE</h2>
+            <div class="bola-contenedor">
+                <span id="num-once" class="numero">Cargando...</span>
+            </div>
+            <p id="serie-once" class="subtexto-sorteo">Serie: --</p>
+        </div>
+
+        <!-- La Primitiva -->
+        <div class="box primitiva">
+            <h2>La Primitiva</h2>
+            <span id="num-primitiva" class="numero">Cargando...</span>
+        </div>
+
+        <!-- Bonoloto -->
+        <div class="box bonoloto">
+            <h2>Bonoloto</h2>
+            <span id="num-bonoloto" class="numero">Cargando...</span>
+        </div>
+
+        <!-- Euromillones -->
+        <div class="box euromillones">
+            <h2>Euromillones</h2>
+            <span id="num-euromillones" class="numero">Cargando...</span>
+            <span id="estrellas-euromillones" class="estrellas"></span>
+        </div>
+
+        <!-- El Gordo de la Primitiva -->
+        <div class="box gordo">
+            <h2>El Gordo</h2>
+            <span id="num-gordo" class="numero">Cargando...</span>
+            <span id="llave-gordo" class="estrellas"></span>
+        </div>
+
+        <!-- Eurojackpot -->
+<div class="box eurojackpot">
+    <h2>Eurojackpot</h2>
+    <!-- Contenedor para las bolas principales -->
+    <div class="bola-contenedor">
+        <span id="num-euro" class="numero">Cargando...</span>
+    </div>
+
+    <!-- Contenedor para los soles (se mostrará debajo) -->
+    <div id="euro-soles" class="soles-contenedor">
+        <!-- Aquí meterás o inyectarás tus soles -->
+    </div>
+</div>
+
+        <!-- La Quiniela -->
+        <div class="box quiniela">
+            <h2>La Quiniela</h2>
+            <div id="contenedor-quiniela" class="boleto-quiniela">Cargando...</div>
+        </div>
+
+        <!-- Quinigol -->
+        <div class="box quinigol">
+            <h2>Quinigol</h2>
+            <div id="contenedor-quinigol" class="boleto-quinigol">Cargando...</div>
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

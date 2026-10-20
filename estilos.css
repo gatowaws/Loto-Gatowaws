@@ -1,0 +1,189 @@
+body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #fafafa; text-align: center; padding: 30px; margin: 0; }
+        h1 { color: #2c3e50; margin-bottom: 5px; }
+        .fecha { color: #7f8c8d; font-style: italic; margin-bottom: 30px; }
+        .aviso-simulacion { max-width: 700px; margin: 12px auto; padding: 10px 14px; border-radius: 8px; background: #fff4ce; color: #614700; }
+        
+        #btn-generar {
+            background-color: #2c3e50;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.2s, transform 0.1s;
+        }
+        #btn-generar:hover { background-color: #34495e; transform: translateY(-1px); }
+        #btn-generar:active { transform: translateY(1px); }
+
+        .grid-container { max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .box { background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border-top: 6px solid #ccc; transition: transform 0.2s; }
+        .box:hover { transform: translateY(-3px); }
+        .box.nacional { border-top-color: #f1c40f; }
+        .box.once { border-top-color: #e74c3c; }
+        .box.primitiva { border-top-color: #2ecc71; }
+        .box.bonoloto { border-top-color: #9b59b6; }
+        .box.euromillones { border-top-color: #3498db; }
+        h2 { font-size: 20px; color: #34495e; margin-top: 0; }
+        .numero { font-size: 26px; font-weight: bold; color: #2c3e50; letter-spacing: 1px; display: block; margin: 15px 0 0; }
+        .error-carga { color: #b42318; font-size: 14px; overflow-wrap: anywhere; }
+        .estrellas { font-size: 18px; color: #f1c40f; font-weight: bold; margin-top: 8px; display: block; }
+.box.gordo { border-top-color: #ff9800; }     /* Color Naranja */
+.box.quiniela { border-top-color: #4caf50; }  /* Color Verde */
+.box.quinigol { border-top-color: #00bcd4; }  /* Color Cian */
+/* Estilos para el boleto de La Quiniela */
+.boleto-quiniela {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columnas por fila */
+    gap: 8px;
+    max-width: 240px;
+    margin: 10px auto 0;
+}
+
+/* Estilos para el boleto de El Quinigol */
+.boleto-quinigol {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 resultados por fila */
+    gap: 10px;
+    max-width: 200px;
+    margin: 10px auto 0;
+}
+
+.casilla-partido {
+    display: flex;                 /* Añade esto */
+    justify-content: space-between;/* Añade esto */
+    align-items: center;           /* Añade esto */
+    background-color: #f7fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 4px;
+    padding: 4px 8px;
+    font-size: 10px;
+    font-weight: bold;
+    color: #4a5568;
+}
+.casilla-partido span {
+    font-size: 11px;
+    color: #718096;
+    display: inline-block; /* Cambiado de block a inline-block */
+    font-weight: normal;
+}
+.pleno-al-15 {
+    grid-column: 1 / -1;
+}
+/* 1. Contenedor para alinear las bolas en horizontal */
+.grid-container .box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 2. Convierte el texto de los números separados por guiones en esferas individuales */
+.numero {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;               /* Separación entre bola y bola */
+    justify-content: center;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+/* 3. Estilo base para cada bola de lotería */
+.numero span, .bola-contenedor span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;             /* Ancho fijo de la bola */
+    height: 40px;            /* Alto fijo de la bola */
+    background: radial-gradient(circle at 30% 30%, #ffffff 0%, #f0f0f0 40%, #d8d8d8 100%); /* Efecto 3D de esfera */
+    color: #333333;          /* Color del número interior */
+    border-radius: 50%;      /* Hace que el contenedor sea perfectamente redondo */
+    border: 2px solid #b5b5b5;
+    box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.15); /* Sombra proyectada en la base */
+    font-size: 1.1rem;
+}
+/* Forzar que los contenedores de los boletos ocupen todo el ancho y se organicen en una lista vertical limpia */
+#contenedor-quiniela, #contenedor-quinigol {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-height: 280px; /* Evita que la tarjeta se estire infinitamente hacia abajo */
+    overflow-y: auto;  /* Si hay muchos elementos, añade una barra de scroll interna muy cómoda */
+    gap: 6px;          /* Añade una separación uniforme entre partido y partido */
+    padding: 5px;
+    box-sizing: border-box;
+}
+
+/* Ajuste final para asegurar que la casilla ocupe el 100% de su contenedor */
+.casilla-partido {
+    width: 100% !important;
+    box-sizing: border-box;
+}
+/* Asegura que la tarjeta de Eurojackpot ordene sus bloques en vertical */
+.box.eurojackpot {
+    display: flex;
+    flex-direction: column !important;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+/* Contenedores de las filas de juego */
+.bola-contenedor, .soles-contenedor {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+
+/* Estilo específico para cambiar el diseño de los soles a amarillo/dorado */
+.soles-contenedor span {
+    background: radial-gradient(circle at 30% 30%, #ffffff 0%, #ffcc00 40%, #d4af37 100%) !important;
+    color: #333333 !important;
+    border: 2px solid #b89726 !important;
+    box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 50% !important; /* <--- AÑADE ESTO EN LA LÍNEA 148 */
+}
+
+/* Forzar a que el contenedor de las bolas normales use flexbox en horizontal */
+.bola-contenedor {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    width: 100% !important;
+    margin-bottom: 12px !important;
+}
+
+/* Forzar a que cada círculo individual dentro del contenedor no rompa la fila */
+.bola-contenedor span, .bola-contenedor .numero span {
+    display: inline-flex !important; /* Evita el salto de línea vertical de cada bola */
+    justify-content: center !important;
+    align-items: center !important;
+}
+
+/* Forzar a que el contenedor de los soles se mantenga horizontal abajo */
+.soles-contenedor, #euro-soles {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    width: 100% !important;
+}
+
+/* Asegurar el diseño correcto de los soles */
+.soles-contenedor span, #euro-soles span {
+    display: inline-flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    background: radial-gradient(circle at 30% 30%, #ffffff 0%, #ffcc00 40%, #d4af37 100%) !important;
+    color: #333333 !important;
+    border: 2px solid #b89726 !important;
+    border-radius: 50% !important; /* <--- AÑADE ESTO EN LA LÍNEA 184 */
+}
+
