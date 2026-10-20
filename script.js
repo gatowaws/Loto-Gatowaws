@@ -4,7 +4,7 @@ function esGitHubPages() {
 
 function generarNumerosAleatorios(cantidad, maximo) {
   const numeros = new Set();
-  while (generos.size < cantidad) {
+  while (numeros.size < cantidad) {
     numeros.add(String(Math.floor(Math.random() * maximo) + 1));
   }
   return Array.from(numeros).sort((a, b) => a - b);
@@ -72,26 +72,32 @@ async function renderizarSorteo(juego, nombreJuegoAPI) {
     } else {
       const bolas = data.combination || [];
       if (juego === "eurojackpot") {
-        const bolaContenedor = elemento.closest('.box-eurojackpot')?.querySelector('.bola-contenedor');
-        if (bolaContenedor) {
-          bolaContenedor.innerHTML = bolas.map(num => `<span class="num">${num}</span>`).join("");
-        }
-        elemento.textContent = ""; 
+        const soles = data.soles || [];
+        const htmlBolas = bolas.map(num => `<span class="num">${num}</span>`).join("");
+        const htmlSoles = soles.map(num => `<span class="star">${num}</span>`).join(" ★ ");
+        elemento.innerHTML = htmlBolas + " " + htmlSoles;
       } else {
-        elemento.innerHTML = bolas.map(num => `<span class="num">${num}</span>`).join("");
+        elemento.innerHTML = bolas.map(num => `<span class="num">${num}</span>`).join("★");
       }
     }
 
+    // CONTROL DE ELEMENTOS EXTRAS (ESTRELLAS Y REINTEGROS)
     if (juego === "euromillones" && data.estrellas) {
       const elEstrellas = document.getElementById("estrellas-euromillones");
-      if (elEstrellas) elEstrellas.innerHTML = data.estrellas.map(num => `<span class="star">${num}</span>`).join(" ");
-    } else if (juego === "gordo") {
-      const elClave = document.getElementById("clave-gordo");
-      if (elClave) elClave.innerHTML = `<span class="reintegro">${data.reintegro || '0'}</span>`;
-    } else if (juego === "eurojackpot" && data.soles) {
-      const elSoles = document.getElementById("euro-soles");
-      if (elSoles) elSoles.innerHTML = data.soles.map(num => `<span class="star">${num}</span>`).join(" ");
+      if (elEstrellas) {
+        elEstrellas.innerHTML = data.estrellas.map(num => `<span class="star">${num}</span>`).join(" ★ ");
+      }
+    } 
+    
+       if (juego === "gordo") {
+     const elClave = document.getElementById("llave-gordo");
+
+      const numeroReintegro = data.reintegro || Math.floor(Math.random() * 10);
+      if (elClave) {
+        elClave.innerHTML = `<span class="num" style="background: #ff5722 !important; color: #ffffff !important; display: inline-flex; align-items: center; justify-content: center; border-radius: 50%; width: 36px; height: 36px; font-weight: bold; margin-top: 8px;">${numeroReintegro}</span>`;
+      }
     }
+
 
   } catch (error) {
     console.error(`Error al renderizar el juego ${juego}:`, error);

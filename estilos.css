@@ -185,5 +185,67 @@ body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #fafafa; te
     color: #333333 !important;
     border: 2px solid #b89726 !important;
     border-radius: 50% !important; /* <--- AÑADE ESTO EN LA LÍNEA 184 */
+}/* Fuerza a que el contenedor de Eurojackpot alinee todo en una fila horizontal */
+.box:has(#num-euro), [class*="eurojackpot"] {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 10px !important;
 }
+
+/* Alinea las bolas principales en horizontal */
+#num-euro {
+    display: flex !important;
+    flex-direction: row !important;
+    gap: 8px !important;
+}
+/* Fuerza la alineación horizontal de las bolas y soles del Eurojackpot */
+#num-euro {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 8px !important;
+    width: 100% !important;
+}
+/* Estilo único para las estrellas/soles del Eurojackpot */
+#num-euro .star {
+    background: #ffcc00 !important; /* Color amarillo dorado */
+    color: #000000 !important;      /* Color del número en negro para que resalte */
+    border-radius: 50% !important;  /* Redondas como las bolas */
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-weight: bold !important;
+    width: 36px !important;         /* Ajusta el tamaño para que sea igual que las otras */
+    height: 36px !important;
+    border: 2px solid #e6b800 !important; /* Un borde dorado un poco más oscuro */
+}
+/* Pone las estrellas de Euromillones en bolas redondas y doradas */
+#estrellas-euromillones .star {
+    background: #ffcc00 !important; /* Amarillo dorado */
+    color: #000000 !important;      /* Número en negro */
+    border-radius: 50% !important;  /* Redonda */
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-weight: bold !important;
+    width: 36px !important;
+    height: 36px !important;
+    border: 2px solid #e6b800 !important;
+    margin: 0 4px !important;
+}
+
+/* Alineación en fila para que queden perfectas */
+#estrellas-euromillones {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: center !important;
+    align-items: center !important;
+    margin-top: 8px !important;
+}
+
 
